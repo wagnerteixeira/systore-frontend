@@ -12,7 +12,6 @@ import MessageSnackbar from './components/common/MessageSnackbar';
 import Menu from './components/layout/Menu';
 
 import theme from './config/theme';
-
 import BillsReceive from './pages/billReceive/BillReceive';
 import Client from './pages/client/Client';
 import Product from './pages/product/Product';
