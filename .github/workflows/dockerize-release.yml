@@ -17,17 +17,14 @@ jobs:
       with:
         node-version: 10.x
       
-    - name: Enter in foler source
-      run: cd src
-      
     - name: Install dependencies 
-      run: yarn install
+      run: cd src && yarn install
     
     - name: Build app
-      run: yarn build
+      run: cd src && yarn build
       
     - name: Remove map files
-      run: rm -rf ./build/**/*.map      
+      run: cd src && rm -rf ./build/**/*.map      
       
     - name: Archive production artifacts
       uses: actions/upload-artifact@v1
