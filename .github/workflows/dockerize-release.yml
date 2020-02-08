@@ -17,6 +17,9 @@ jobs:
       with:
         node-version: 10.x
       
+    - name: Enter in foler source
+      run: cd src
+      
     - name: Install dependencies 
       run: yarn install
     
@@ -30,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: SystoreFront
-        path: build
+        path: ./src/build
