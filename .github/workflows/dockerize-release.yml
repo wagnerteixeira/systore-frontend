@@ -22,6 +22,10 @@ jobs:
     
     - name: Build app
       run: cd src && yarn build
+      env: 
+        REACT_APP_PUBLIC_URL: ""
+        REACT_APP_API_PAT: "/api"
+        REACT_APP_OAPI_PATH: "/oapi"
       
     - name: Remove map files
       run: cd src && rm -rf ./build/**/*.map      
