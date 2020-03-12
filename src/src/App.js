@@ -35,6 +35,7 @@ class App extends Component {
       messageOpen: false,
       variantMessage: 'success',
       messageText: '',
+      validatingToken: false,
     };
   }
 
@@ -129,15 +130,35 @@ class App extends Component {
       variantMessage,
       logged,
       user,
+      validatingToken,
     } = this.state;
     if (!logged) {
       let _token = localStorageService.getItem('token');
-      if (_token) {
-        axiosOApi.post('/validateToken', `"${_token}"`).then(res => {
-          if (res.data.valid) {
-            this.setState({ logged: true, user: res.data.user });
-          }
-        });
+      if (_token && !validatingToken) {
+        this.setState({ validatingToken: true });
+        axiosOApi
+          .post('/validateToken', `"${_token}"`)
+          .then(res => {
+            if (res.data.valid) {
+              this.setState({ logged: true, user: res.data.user });
+            } else localStorageService.setItem('token', '');
+            this.setState({ validatingToken: false });
+          })
+          .catch(e => {
+            localStorageService.setItem('token', '');
+            this.setState({ validatingToken: false });
+            console.log(e);
+            console.log(e.response);
+            if (e.response.status === 402) {
+              this.setState({
+                logged: false,
+                messageOpen: true,
+                messageText:
+                  'Sistema não liberado. Verifique se há alguma pendência financeira.',
+                variantMessage: 'error',
+              });
+            }
+          });
       }
     }
     return (

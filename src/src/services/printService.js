@@ -58,36 +58,25 @@ const createPageForPrintLX300 = (clientData, billReceive) => {
     y: 45,
   }); //valor
   //linha 4
-  let totalValue =
-    billReceive.payDate != null
-      ? billReceive.finalValue
-      : parseFloat(
-          getValueWithInterest(
-            billReceive.originalValue,
-            billReceive.dueDate,
-            dateCurrent
-          )
-        );
-  let interest = totalValue - parseFloat(billReceive.originalValue);
-  if (interest > 0) {
+  if (billReceive.interest > 0) {
     items.push({
-      text: getNumberToString2(interest),
+      text: getNumberToString2(billReceive.interest),
       x: _x + 36,
       y: 58,
     }); //juros
     items.push({
-      text: getNumberToString2(interest),
+      text: getNumberToString2(billReceive.interest),
       x: _x + 125,
       y: 58,
     }); //juros
     //linha 5
     items.push({
-      text: getNumberToString2(totalValue),
+      text: getNumberToString2(billReceive.finalValue),
       x: _x + 36,
       y: 67,
     }); //total
     items.push({
-      text: getNumberToString2(totalValue),
+      text: getNumberToString2(billReceive.finalValue),
       x: _x + 125,
       y: 67,
     }); //total
