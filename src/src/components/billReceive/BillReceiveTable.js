@@ -450,7 +450,9 @@ function BillReceiveTable(props) {
                     </div>
                   </TableCell>
                   <TableCell size="small">{billsReceive[key].code}</TableCell>
-                  <TableCell size="small">{billsReceive[key].quota}</TableCell>
+                  <TableCell size="small">
+                    {billsReceive[key].quota}/{billsReceive[key].numberOfQuotas}
+                  </TableCell>
                   <TableCell>
                     {getDateToString(billsReceive[key].dueDate)}
                   </TableCell>
